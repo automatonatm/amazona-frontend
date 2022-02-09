@@ -48,10 +48,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.8.0"
-  },
-  "engines": {
-    "node" : "14.0.0"
-
+    "eslint": "^8.8.0",
+    "eslint-config-react-app": "^7.0.0"
   }
 }
