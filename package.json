@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "http://127.0.0.1:3001",
+  "proxy": "https://amazona-backend-api.herokuapp.com",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -46,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node" : "12.4.0",
+    "npm" : "6.9.0"
   }
 }
