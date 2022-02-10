@@ -9,6 +9,8 @@ import {
 
 import axios from "axios";
 
+import appConfig from "../../utils/config";
+
 
 export const signInUser = (formData) => async (dispatch) => {
      const {email, password} = formData
@@ -27,7 +29,7 @@ export const signInUser = (formData) => async (dispatch) => {
         };
 
 
-        const {data} = await axios.post('/api/v1/auth/signin', formData, config)
+        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/auth/signin`, formData, config)
 
 
         dispatch({
@@ -59,7 +61,7 @@ export const signUpUser = (formData) => async (dispatch) => {
             }
         };
 
-        const {data} = await axios.post('/api/v1/auth/signup', formData, config)
+        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/auth/signup`, formData, config)
 
         dispatch({
             type: USER_SIGNUP_SUCCESS,
@@ -79,7 +81,7 @@ export const signUpUser = (formData) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
 
-    axios.post('/api/v1/auth/logout')
+    axios.post(`${appConfig.baseURL}/api/v1/auth/logout`)
         .then(() => {
             dispatch({
                 type: USER_SIGNOUT
@@ -97,7 +99,7 @@ export const getUserData = () =>  (dispatch) => {
 
     dispatch({type: USER_DETAILS_REQUEST})
 
-    axios.get('/api/v1/auth/me')
+    axios.get(`${appConfig.baseURL}/api/v1/auth/me`)
         .then(({data}) => {
             dispatch({
                 type: USER_DETAILS_SUCCESS,

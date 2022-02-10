@@ -7,6 +7,7 @@ import MessageBox from "../../components/utils/MessageBox";
 import {getProductDetails, productUpdate} from "../../store/actions/productActions";
 import {PRODUCT_UPDATE_RESET} from "../../store/constants/productsConstants";
 import axios from "axios";
+import appConfig from "../../utils/config";
 
 
 const ProductEditScreen = () => {
@@ -89,7 +90,8 @@ const ProductEditScreen = () => {
             const config = {
                 'Content-Type' : 'multi/form-data'
             }
-            const {data} = await axios.put(`/api/v1/products/${productId}/uploads`, bodyFormData, config)
+
+            const {data} = await axios.put(`${appConfig.baseURL}/api/v1/products/${productId}/uploads`, bodyFormData, config)
 
             setLoadingUpload(false)
             setImage(data.data)

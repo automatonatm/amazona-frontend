@@ -9,6 +9,7 @@ import {
     PRODUCT_LIST_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS
 } from "../constants/productsConstants";
 
+import appConfig from "../../utils/config";
 
 
 export const listProducts = () => async (dispatch) => {
@@ -18,7 +19,7 @@ export const listProducts = () => async (dispatch) => {
 
     try {
 
-        const {data} = await axios.get('/api/v1/products/')
+        const {data} = await axios.get(`${appConfig.baseURL}/api/v1/products/`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -40,7 +41,7 @@ export const getProductDetails = (productId) => async (dispatch) => {
     })
 
     try {
-        const {data} = await axios.get(`/api/v1/products/${productId}`)
+        const {data} = await axios.get(`${appConfig.baseURL}/api/v1/products/${productId}`)
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
             payload: data.data
@@ -62,7 +63,7 @@ export const createProduct = (data) => async (dispatch) => {
         type: PRODUCT_CREATE_REQUEST
     })
     try {
-        const {data} = await axios.post(`/api/v1/products/`)
+        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/products/`)
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
             payload: data.data
@@ -82,7 +83,7 @@ export const productUpdate = (productId, updateData) => async (dispatch) => {
         type: PRODUCT_UPDATE_REQUEST
     })
     try {
-        const {data} = await axios.put(`/api/v1/products/${productId}`, updateData)
+        const {data} = await axios.put(`${appConfig.baseURL}/api/v1/products/${productId}`, updateData)
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
             payload: data.data
@@ -102,7 +103,7 @@ export const productDelete = (productId) => async (dispatch) => {
         type: PRODUCT_DELETE_REQUEST
     })
     try {
-         await axios.delete(`/api/v1/products/${productId}`)
+         await axios.delete(`${appConfig.baseURL}/api/v1/products/${productId}`)
         dispatch({
             type: PRODUCT_DELETE_SUCCESS,
             payload: productId

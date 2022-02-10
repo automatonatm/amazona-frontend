@@ -20,6 +20,8 @@ import {
 import axios from "axios";
 import {CART_EMPTY} from "../constants/cartConstants";
 
+import appConfig from "../../utils/config";
+
 export const createOrder = (order) => async (dispatch, getState) => {
 
     dispatch({
@@ -37,7 +39,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
       //  const {} = getState() //returns the whole state
 
-       const {data}  =  await axios.post(`/api/v1/orders`, order, config)
+       const {data}  =  await axios.post(`${appConfig.baseURL}/api/v1/orders`, order, config)
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -66,7 +68,7 @@ export const getOrderDetails = (orderId) => async (dispatch) => {
 
     try {
 
-        const {data}  =  await axios.get(`/api/v1/orders/${orderId}`)
+        const {data}  =  await axios.get(`${appConfig.baseURL}/api/v1/orders/${orderId}`)
 
         dispatch({
             type: GET_ORDER_SUCCESS,
@@ -95,7 +97,7 @@ export const payOrder = (order, paymentData) => async (dispatch) => {
             }
         };
 
-        const {data} = await axios.post(`/api/v1/orders/${order.id}/pay`, paymentData, config)
+        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/orders/${order.id}/pay`, paymentData, config)
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
@@ -117,7 +119,7 @@ export const getUserOrders = () => async (dispatch) => {
 
     try {
 
-        const {data} = await axios.get(`/api/v1/orders/`)
+        const {data} = await axios.get(`${appConfig.baseURL}/api/v1/orders/`)
 
         dispatch({
             type: GET_USER_ORDERS_SUCCESS,
@@ -139,7 +141,7 @@ export const getAllOrders = () => async (dispatch) => {
 
     try {
 
-        const {data} = await axios.get(`/api/v1/orders/admin/orders`)
+        const {data} = await axios.get(`${appConfig.baseURL}/api/v1/orders/admin/orders`)
 
         dispatch({
             type: GET_ALL_ORDERS_SUCCESS,
@@ -161,7 +163,7 @@ export const deliverOrder = (orderId) => async (dispatch) => {
 
     try {
 
-        await axios.put(`/api/v1/orders/${orderId}/deliver`)
+        await axios.put(`${appConfig.baseURL}/api/v1/orders/${orderId}/deliver`)
 
         dispatch({
             type: ORDER_DELIVER_SUCCESS,
