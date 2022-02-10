@@ -68,7 +68,7 @@ export const userSignUpReducer = (state = {}, action) => {
     }
 }
 
-export const userReducer = (state = {loading : true}, action) => {
+export const userReducer = (state = {loading : false}, action) => {
 
     switch (action.type) {
 
