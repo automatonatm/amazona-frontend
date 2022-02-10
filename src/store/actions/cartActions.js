@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../../utils/config";
+
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
