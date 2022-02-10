@@ -7,7 +7,7 @@ import {
     USER_SIGN_SUCCESS, USER_SIGNOUT, USER_SIGNUP_FAIL, USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS
 } from "../constants/userConstants";
 
-import axios from "../../utils/axios";
+import axios from "axios";
 
 
 export const signInUser = (formData) => async (dispatch) => {

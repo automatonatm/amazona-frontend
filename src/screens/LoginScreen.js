@@ -28,7 +28,6 @@ const LoginScreen = () => {
    const {loading, error, success} = useSelector(state => state.userSignIn)
  //   const {authenticated} = useSelector(state => state.authUser)
 
-    console.log("HERE")
 
     const signUpHandler  = (e) => {
         e.preventDefault()

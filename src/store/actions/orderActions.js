@@ -17,7 +17,7 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS
 } from "../constants/orderConstants";
-import axios from "../../utils/axios";
+import axios from "axios";
 import {CART_EMPTY} from "../constants/cartConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -37,7 +37,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
       //  const {} = getState() //returns the whole state
 
-       const {data}  =  await axios.post('/api/v1/orders', order, config)
+       const {data}  =  await axios.post(`/api/v1/orders`, order, config)
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,

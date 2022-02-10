@@ -1,4 +1,4 @@
-import axios from "../../utils/axios";
+import axios from "axios";
 import {
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS,
