@@ -10,6 +10,7 @@ import {
 import axios from "../../utils/axios";
 
 import Cookie from 'js-cookie';
+import Cookies from "js-cookie";
 
 
 
@@ -50,8 +51,8 @@ export const signInUser = (formData) => async (dispatch) => {
             payload: data.data
         })
 
-
         dispatch(getUserData())
+
     }catch (err) {
         dispatch({
             type: USER_SIGN_FAIL,
@@ -116,7 +117,14 @@ export const getUserData = () =>  (dispatch) => {
 
     dispatch({type: USER_DETAILS_REQUEST})
 
-    axios.get(`/api/v1/auth/me`)
+    const token = Cookies.get('authToken');
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    }
+
+
+    axios.get(`/api/v1/auth/me`, config )
         .then(({data}) => {
             dispatch({
                 type: USER_DETAILS_SUCCESS,
