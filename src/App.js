@@ -26,7 +26,7 @@ import OrdersScreen from "./screens/adminScreens/OrdersScreen";
 
 
 
-const getCookie = (name) => {
+/*const getCookie = (name) => {
 
     let cookie = {};
 
@@ -36,7 +36,9 @@ const getCookie = (name) => {
     });
 
     return  cookie[name];
-};
+};*/
+
+import Cookie from 'js-cookie';
 
 
 
@@ -47,11 +49,16 @@ function App() {
 
     const {user, loading} = useSelector(state => state.authUser)
 
-    const token =  getCookie('amazona_token');
+    //const token =  getCookie('auth');
+
+    const token = Cookie.get('authToken');
+
 
     const dispatch = useDispatch()
 
+
     const navigate = useNavigate()
+
 
     useEffect(() => {
         if(token) {

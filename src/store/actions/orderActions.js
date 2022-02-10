@@ -17,7 +17,7 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS
 } from "../constants/orderConstants";
-import axios from "axios";
+import axios from "../../utils/axios";
 import {CART_EMPTY} from "../constants/cartConstants";
 
 

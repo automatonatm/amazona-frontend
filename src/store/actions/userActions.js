@@ -7,7 +7,10 @@ import {
     USER_SIGN_SUCCESS, USER_SIGNOUT, USER_SIGNUP_FAIL, USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS
 } from "../constants/userConstants";
 
-import axios from "axios";
+import axios from "../../utils/axios";
+
+import Cookie from 'js-cookie';
+
 
 
 
@@ -27,6 +30,8 @@ export const signInUser = (formData) => async (dispatch) => {
 
         const {data} = await axios.post(`/api/v1/auth/signin`, formData, config)
 
+
+        Cookie.set('authToken',  data.token);
 
 
 
@@ -76,6 +81,8 @@ export const signUpUser = (formData) => async (dispatch) => {
             payload: data.data
         })
 
+        Cookie.set('authToken',  data.token);
+
         dispatch(getUserData())
 
     }catch (err) {
@@ -94,6 +101,8 @@ export const logoutUser = () => async (dispatch) => {
             dispatch({
                 type: USER_SIGNOUT
             });
+
+            Cookie.remove('authToken');
 
             localStorage.removeItem('cartItems')
             localStorage.removeItem('shippingAddress')
