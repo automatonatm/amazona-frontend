@@ -91,7 +91,7 @@ const ProductEditScreen = () => {
                 'Content-Type' : 'multi/form-data'
             }
 
-            const {data} = await axios.put(`${appConfig.baseURL}/api/v1/products/${productId}/uploads`, bodyFormData, config)
+            const {data} = await axios.put(`/api/v1/products/${productId}/uploads`, bodyFormData, config)
 
             setLoadingUpload(false)
             setImage(data.data)

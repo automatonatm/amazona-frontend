@@ -9,16 +9,12 @@ import {
 
 import axios from "axios";
 
-import appConfig from "../../utils/config";
+
 
 
 export const signInUser = (formData) => async (dispatch) => {
-     const {email, password} = formData
     dispatch({
-        type: USER_SIGN_REQUEST,
-        payload: {
-            email, password
-        }
+        type: USER_SIGN_REQUEST
     })
 
     try {
@@ -29,16 +25,28 @@ export const signInUser = (formData) => async (dispatch) => {
         };
 
 
-        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/auth/signin`, formData, config)
+        const {data} = await axios.post(`/api/v1/auth/signin`, formData, config)
 
+
+
+
+ /*    const cookies = new Cookies();
+
+        const options = {
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+            httpOnly: true,
+            secure: true
+        };
+
+        cookies.set('amazona_token', data.token, { path: '/',  domain: appConfig.baseURL }, options);*/
 
         dispatch({
             type: USER_SIGN_SUCCESS,
             payload: data.data
         })
 
-        dispatch(getUserData())
 
+        dispatch(getUserData())
     }catch (err) {
         dispatch({
             type: USER_SIGN_FAIL,
@@ -61,7 +69,7 @@ export const signUpUser = (formData) => async (dispatch) => {
             }
         };
 
-        const {data} = await axios.post(`${appConfig.baseURL}/api/v1/auth/signup`, formData, config)
+        const {data} = await axios.post(`/api/v1/auth/signup`, formData, config)
 
         dispatch({
             type: USER_SIGNUP_SUCCESS,
@@ -81,7 +89,7 @@ export const signUpUser = (formData) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
 
-    axios.post(`${appConfig.baseURL}/api/v1/auth/logout`)
+    axios.post(`/api/v1/auth/logout`)
         .then(() => {
             dispatch({
                 type: USER_SIGNOUT
@@ -99,7 +107,7 @@ export const getUserData = () =>  (dispatch) => {
 
     dispatch({type: USER_DETAILS_REQUEST})
 
-    axios.get(`${appConfig.baseURL}/api/v1/auth/me`)
+    axios.get(`/api/v1/auth/me`)
         .then(({data}) => {
             dispatch({
                 type: USER_DETAILS_SUCCESS,
