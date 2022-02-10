@@ -69,13 +69,9 @@ export const signUpUser = (formData) => async (dispatch) => {
     })
 
     try {
-        const config = {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        };
+       ;
 
-        const {data} = await axios.post(`/api/v1/auth/signup`, formData, config)
+        const {data} = await axios.post(`/api/v1/auth/signup`, formData)
 
         dispatch({
             type: USER_SIGNUP_SUCCESS,
