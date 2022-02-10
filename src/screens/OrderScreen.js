@@ -7,7 +7,7 @@ import {deliverOrder, getOrderDetails, payOrder} from "../store/actions/orderAct
 
 import LoadingBox from "../components/utils/LoadingBox";
 import MessageBox from "../components/utils/MessageBox";
-import axios from "axios";
+import axios from "../utils/axios";
 import {PayPalButton} from "react-paypal-button-v2";
 import {ORDER_DELIVER_RESET, ORDER_PAY_RESET} from "../store/constants/orderConstants";
 
