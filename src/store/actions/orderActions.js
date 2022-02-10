@@ -31,11 +31,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     try {
 
-        const config = {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        };
+
 
       //  const {} = getState() //returns the whole state
 
