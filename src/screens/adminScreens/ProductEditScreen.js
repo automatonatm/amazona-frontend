@@ -7,7 +7,7 @@ import MessageBox from "../../components/utils/MessageBox";
 import {getProductDetails, productUpdate} from "../../store/actions/productActions";
 import {PRODUCT_UPDATE_RESET} from "../../store/constants/productsConstants";
 import axios from "axios";
-import appConfig from "../../utils/config";
+
 
 
 const ProductEditScreen = () => {
