@@ -31,10 +31,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     try {
 
-
-
-      //  const {} = getState() //returns the whole state
-
        const {data}  =  await axios.post(`/api/v1/orders`, order)
 
         dispatch({
@@ -87,13 +83,9 @@ export const payOrder = (order, paymentData) => async (dispatch) => {
 
     try {
 
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
 
-        const {data} = await axios.post(`/api/v1/orders/${order.id}/pay`, paymentData, config)
+
+        const {data} = await axios.post(`/api/v1/orders/${order.id}/pay`, paymentData)
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
