@@ -13,9 +13,9 @@ const SearchScreen = () => {
 
     const query = params.query
 
-   const name = !query ? 'all' : query
+   const name = !query ? '' : query
 
-    console.log(name)
+   // console.log(name)
 
 
     const {loading, error, products} = useSelector(state => state.productList)
