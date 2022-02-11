@@ -39,6 +39,8 @@ import OrdersScreen from "./screens/adminScreens/OrdersScreen";
 };*/
 
 import Cookie from 'js-cookie';
+import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screens/SearchScreen";
 
 
 
@@ -88,6 +90,13 @@ function App() {
                 <div className="row">
                     <Link className="brand" to="/">amazona</Link>
                 </div>
+
+                <div>
+
+                    <SearchBox/>
+
+                </div>
+
                 <div>
 
                     <Link to="/cart">
@@ -145,12 +154,16 @@ function App() {
                     }
 
                 </div>
+
             </header>
+
 
             <main>
                 <Routes>
                     <Route path="/products/:id" element={<ProductScreen/>}/>
                     <Route path="/" element={<HomeScreen/>}/>
+
+                    <Route path="/search" element={<SearchScreen/>}/>
 
                     <Route path="/cart">
                         <Route path=":productId" element={<CartScreen/>}/>

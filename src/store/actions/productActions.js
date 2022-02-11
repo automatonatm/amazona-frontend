@@ -11,14 +11,26 @@ import {
 } from "../constants/productsConstants";
 
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (options) => async (dispatch) => {
+
+
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
 
+
     try {
 
-        const {data} = await axios.get(`/api/v1/products/`)
+        let url = `/api/v1/products`
+
+        if(options) {
+            if(options.name) {
+                url = `/api/v1/products?name=${options.name}`
+            }
+
+        }
+
+        const {data} = await axios.get(url)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
