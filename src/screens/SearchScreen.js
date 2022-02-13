@@ -63,7 +63,7 @@ const SearchScreen = () => {
                                     <ul>
                                         {categories.map((cat, index) => (
                                             <li key={index}>
-                                                <Link to={getFilterCategory({category: cat})} className={cat == category ? 'active' : ''}>
+                                                <Link to={getFilterCategory({category: cat})} className={cat === category ? 'active' : ''}>
                                                     {cat}
                                                 </Link>
 
