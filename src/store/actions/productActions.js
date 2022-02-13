@@ -1,6 +1,8 @@
 import axios from "../../utils/axios";
 
 import {
+    PRODUCT_CATEGORY_FAIL,
+    PRODUCT_CATEGORY_REQUEST, PRODUCT_CATEGORY_SUCCESS,
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -13,19 +15,28 @@ import {
 
 export const listProducts = (options) => async (dispatch) => {
 
-
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
 
-
     try {
+
+        //console.log(options)
 
         let url = `/api/v1/products`
 
         if(options) {
+
             if(options.name) {
                 url = `/api/v1/products?name=${options.name}`
+            }
+
+            if(options.category) {
+                url = `/api/v1/products?category=${options.category}`
+            }
+
+            if(options.category && options.name) {
+                url = `/api/v1/products?name=${options.name}&category=${options.category}`
             }
 
         }
@@ -126,6 +137,29 @@ export const productDelete = (productId) => async (dispatch) => {
             payload: err.response && err.response.data.message ? err.response.data.message : err.message
         })
     }
+}
+
+
+export const getProductCategory = () => async (dispatch) => {
+
+    dispatch({type: PRODUCT_CATEGORY_REQUEST})
+
+    try {
+
+        const {data} = await axios.get(`/api/v1/categories`)
+
+        dispatch({
+            type: PRODUCT_CATEGORY_SUCCESS,
+            payload: data.data
+        })
+
+    }catch (err) {
+        dispatch({
+            type: PRODUCT_CATEGORY_FAIL,
+            payload: err.response && err.response.data.message ? err.response.data.message : err.message
+        })
+    }
+
 }
 
 

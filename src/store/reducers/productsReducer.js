@@ -1,4 +1,6 @@
 import {
+    PRODUCT_CATEGORY_FAIL,
+    PRODUCT_CATEGORY_REQUEST, PRODUCT_CATEGORY_SUCCESS,
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_RESET,
@@ -171,3 +173,29 @@ export const productDeleteReducer = (state = {}, action) => {
 }
 
 
+export const categoryList = (state = {products: [], loading: true}, action) => {
+
+    switch (action.type) {
+
+        case PRODUCT_CATEGORY_REQUEST:
+            return {
+                loading: true
+            }
+
+        case PRODUCT_CATEGORY_SUCCESS:
+            return  {
+                categories: action.payload,
+                loading: false,
+            }
+
+        case PRODUCT_CATEGORY_FAIL:
+            return {
+                error: action.payload,
+                loading: false,
+            }
+
+        default:
+            return state
+
+    }
+}

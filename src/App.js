@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Routes, Route, Link, useNavigate} from 'react-router-dom'
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
@@ -41,6 +41,9 @@ import OrdersScreen from "./screens/adminScreens/OrdersScreen";
 import Cookie from 'js-cookie';
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
+import {getProductCategory} from "./store/actions/productActions";
+import LoadingBox from "./components/utils/LoadingBox";
+import MessageBox from "./components/utils/MessageBox";
 
 
 
@@ -55,14 +58,22 @@ function App() {
 
     const token = Cookie.get('authToken');
 
+    const {loading: loadingCategory, error: categoryError, categories} = useSelector(state => state.categories)
+
 
     const dispatch = useDispatch()
 
 
     const navigate = useNavigate()
 
+    const [sideBarIsOpen, setSideBarIsOpen] = useState(false)
+
+
 
     useEffect(() => {
+
+        dispatch(getProductCategory())
+
         if(token) {
             const  decodeToken =  jwtDecode(token);
             if(decodeToken.exp * 10000 < Date.now()) {
@@ -82,12 +93,20 @@ function App() {
     }
 
 
+
+
     return (
 
         <div className="grid-container">
 
             <header className="row">
                 <div className="row">
+                    <button
+                        className="open-sidebar"
+                        onClick={() =>setSideBarIsOpen(true)}
+                        type="button">
+                        <i className="fa fa-bars"/>
+                    </button>
                     <Link className="brand" to="/">amazona</Link>
                 </div>
 
@@ -156,6 +175,32 @@ function App() {
                 </div>
 
             </header>
+
+            <aside className={sideBarIsOpen ? 'open' : ''}>
+
+                <ul className="categories">
+                    <li>
+                        <strong>Categories</strong>
+                        <button
+                            className="close-sidebar"
+                            type="button"
+                            onClick={() => setSideBarIsOpen(false)}><i className="fa fa-close"/></button>
+                    </li>
+
+                    {loadingCategory ? (<LoadingBox/>) : categoryError ? (<MessageBox variant="danger">{categoryError}</MessageBox>) : (
+                        categories.map((category, index) => (
+                            <li key={index}
+                                onClick={() => setSideBarIsOpen(false)}
+                            >
+                                <Link to={`/search?category=${category}`}>{category}</Link>
+                            </li>
+                        ))
+                        )}
+
+
+                </ul>
+
+            </aside>
 
 
             <main>

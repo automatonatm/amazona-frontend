@@ -4,7 +4,7 @@ import {
     productDetails,
     productCreateReducer,
     productUpdateReducer,
-    productDeleteReducer
+    productDeleteReducer, categoryList
 } from "./productsReducer";
 import {cartItems} from "./cartReducer";
 import {userSignInReducer, userReducer, userSignUpReducer} from "./userReducer";
@@ -34,7 +34,8 @@ const reducer = combineReducers({
     productUpdate: productUpdateReducer,
     productDelete: productDeleteReducer,
     adminOrders: adminOrdersReducer,
-    deliverOrder: adminDeliverOrdersReducer
+    deliverOrder: adminDeliverOrdersReducer,
+    categories: categoryList
 })
 
 

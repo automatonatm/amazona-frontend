@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useSearchParams} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {listProducts} from "../store/actions/productActions";
 import LoadingBox from "../components/utils/LoadingBox";
@@ -13,18 +13,33 @@ const SearchScreen = () => {
 
     const query = params.query
 
+    const category =  params.category || ''
+
    const name = !query ? '' : query
 
-   // console.log(name)
+
 
 
     const {loading, error, products} = useSelector(state => state.productList)
+    const {loading: loadingCategory, error: categoryError, categories} = useSelector(state => state.categories)
+
 
     const dispatch = useDispatch()
 
+    const getFilterCategory = (filter) => {
+        const filterCategory = filter.category || category
+        if(name) {
+            return `/search?query=${name}&category=${filterCategory}`
+        }else {
+            return `/search?category=${filterCategory}`
+        }
+
+
+    }
+
     useEffect(() => {
-        dispatch(listProducts({name}))
-    }, [dispatch, name])
+        dispatch(listProducts({name, category}))
+    }, [dispatch, name, category])
 
     return (
         <div>
@@ -39,9 +54,29 @@ const SearchScreen = () => {
             <div className="row top">
                 <div className="col-1">
                     <h3>Department</h3>
-                    <ul>
-                        <li>Category 1</li>
-                    </ul>
+
+                    {loadingCategory ? (<LoadingBox/>) : categoryError ? (<MessageBox variant="danger">{categoryError}</MessageBox>) : (
+
+                        <>
+                            {categories.length === 0  ?
+                                (<MessageBox>No Categories Found</MessageBox>) : (
+                                    <ul>
+                                        {categories.map((cat, index) => (
+                                            <li key={index}>
+                                                <Link to={getFilterCategory({category: cat})} className={cat == category ? 'active' : ''}>
+                                                    {cat}
+                                                </Link>
+
+                                            </li>
+                                        ))}
+
+                                    </ul>
+                                )}
+
+                           </>
+
+                    )}
+
 
                 </div>
                 <div className="col-2">

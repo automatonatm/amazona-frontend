@@ -16,7 +16,8 @@ const ProductsScreen = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(!products || success) {
+
+        if(!products  || success) {
             dispatch({type: PRODUCT_DELETE_RESET})
             dispatch(listProducts())
         }
