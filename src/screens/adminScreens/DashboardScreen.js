@@ -14,7 +14,8 @@ const DashboardScreen = () => {
 
 
     useEffect(() => {
-        dispatch(getOrdersSummary())
+
+            dispatch(getOrdersSummary())
     }, [dispatch])
 
     return (

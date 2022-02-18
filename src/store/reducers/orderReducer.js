@@ -184,7 +184,7 @@ export const adminDeliverOrdersReducer = (state = {}, action) => {
 
 
 
-export const getOrdersStats = (state = {loading: false}, action) => {
+export const getOrdersStats = (state = {loading: true}, action) => {
 
     switch (action.type) {
 
