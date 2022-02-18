@@ -15,6 +15,8 @@ import {
 
 export const listProducts = (options) => async (dispatch) => {
 
+
+
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
@@ -23,9 +25,9 @@ export const listProducts = (options) => async (dispatch) => {
 
         //console.log(options)
 
-        let url = `/api/v1/products`
+        const url = `/api/v1/products?name=${options.name}&category=${options.category}&min=${options.min}&max=${options.max}`
 
-        if(options) {
+        /*if(options) {
 
             if(options.name) {
                 url = `/api/v1/products?name=${options.name}`
@@ -39,7 +41,12 @@ export const listProducts = (options) => async (dispatch) => {
                 url = `/api/v1/products?name=${options.name}&category=${options.category}`
             }
 
-        }
+            if(options.category && options.name) {
+                console.log(options)
+                url = `/api/v1/products?name=${options.name}&category=${options.category}&min=${options.min}&max=${options.max}`
+            }
+
+        }*/
 
         const {data} = await axios.get(url)
 

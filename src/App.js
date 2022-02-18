@@ -44,6 +44,7 @@ import SearchScreen from "./screens/SearchScreen";
 import {getProductCategory} from "./store/actions/productActions";
 import LoadingBox from "./components/utils/LoadingBox";
 import MessageBox from "./components/utils/MessageBox";
+import DashboardScreen from "./screens/adminScreens/DashboardScreen";
 
 
 
@@ -156,7 +157,7 @@ function App() {
                                 <ul className="dropdown-content">
 
                                     <li>
-                                        <Link to="/dashboard" >Dashboard</Link>
+                                        <Link to="/admin/dashboard" >Dashboard</Link>
                                     </li>
                                     <li>
                                         <Link to="/admin/orders" >Orders</Link>
@@ -260,9 +261,17 @@ function App() {
                         <AdminRoute>
                             <OrdersScreen/>
                         </AdminRoute>
+
                     }/>*/}
 
                     <Route path="/admin">
+
+
+                            <Route path="dashboard" element={
+                                <AdminRoute>
+                                    <DashboardScreen/>
+                                </AdminRoute>
+                            }/>
 
                         <Route path="products">
                             <Route path="" element={

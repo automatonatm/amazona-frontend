@@ -4,7 +4,7 @@ import {
     GET_ALL_ORDERS_SUCCESS,
     GET_ORDER_FAIL,
     GET_ORDER_REQUEST,
-    GET_ORDER_SUCCESS,
+    GET_ORDER_SUCCESS, GET_ORDERS_SUMMARY_FAIL, GET_ORDERS_SUMMARY_REQUEST, GET_ORDERS_SUMMARY_SUCCESS,
     GET_USER_ORDERS_FAIL,
     GET_USER_ORDERS_REQUEST,
     GET_USER_ORDERS_SUCCESS,
@@ -177,6 +177,32 @@ export const adminDeliverOrdersReducer = (state = {}, action) => {
         case ORDER_DELIVER_RESET:
             return {}
 
+        default:
+            return state
+    }
+}
+
+
+
+export const getOrdersStats = (state = {loading: false}, action) => {
+
+    switch (action.type) {
+
+        case GET_ORDERS_SUMMARY_REQUEST:
+            return  {
+                loading: true
+            }
+        case GET_ORDERS_SUMMARY_SUCCESS:
+            return {
+                loading: false,
+                summary: action.payload
+            }
+
+        case GET_ORDERS_SUMMARY_FAIL:
+            return  {
+                loading: false,
+                error: action.payload
+            }
         default:
             return state
     }

@@ -4,7 +4,7 @@ import {
     GET_ALL_ORDERS_SUCCESS,
     GET_ORDER_FAIL,
     GET_ORDER_REQUEST,
-    GET_ORDER_SUCCESS,
+    GET_ORDER_SUCCESS, GET_ORDERS_SUMMARY_FAIL, GET_ORDERS_SUMMARY_REQUEST, GET_ORDERS_SUMMARY_SUCCESS,
     GET_USER_ORDERS_FAIL,
     GET_USER_ORDERS_REQUEST,
     GET_USER_ORDERS_SUCCESS,
@@ -165,4 +165,27 @@ export const deliverOrder = (orderId) => async (dispatch) => {
         })
     }
 
+}
+
+
+export const getOrdersSummary = () => async (dispatch) => {
+
+    dispatch({type: GET_ORDERS_SUMMARY_REQUEST})
+
+    try {
+
+       const {data} =  await axios.get(`/api/v1/orders/admin/stats`)
+
+        dispatch({
+            type: GET_ORDERS_SUMMARY_SUCCESS,
+            payload: data.data
+        })
+
+
+    }catch (err) {
+        dispatch({
+            type: GET_ORDERS_SUMMARY_FAIL,
+            payload: err.response && err.response.data.message ? err.response.data.message : err.message
+        })
+    }
 }
